@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上野道一 — TATTOO ARTIST</title>
+<meta name="description" content="上野道一 | Tattoo Artist | China · Tokyo · London | 遵循自然 Follow Nature">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0908;
+  --bg-2:#131110;
+  --bg-3:#1c1a18;
+  --ink:#f2ede4;
+  --ink-2:#a8a29a;
+  --ink-3:#6b665f;
+  --gold:#b8945f;
+  --rust:#8b3a1f;
+  --line:rgba(242,237,228,0.08);
+  --line-2:rgba(242,237,228,0.15);
+  --serif-en:'Cormorant Garamond',serif;
+  --serif-cn:'Noto Serif SC',serif;
+  --serif-jp:'Noto Serif JP',serif;
+  --sans:'Inter','Noto Sans SC','Noto Sans JP',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--ink-3);border-radius:0}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:24px 48px;
+  transition:all .4s ease;
+}
+.nav.scrolled{
+  background:rgba(10,9,8,0.85);
+  backdrop-filter:blur(12px);
+  padding:16px 48px;
+  border-bottom:1px solid var(--line);
+}
+.nav-brand{
+  font-family:var(--serif-cn);
+  font-size:16px;font-weight:400;
+  letter-spacing:0.15em;
+  color:var(--ink);
+  text-decoration:none;
+}
+.nav-brand span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:32px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  font-size:11px;font-weight:400;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--ink-2);text-decoration:none;
+  transition:color .3s;
+}
+.nav-links a:hover{color:var(--gold)}
+.lang-switch{
+  display:flex;gap:2px;
+  border:1px solid var(--line-2);
+  border-radius:0;
+  overflow:hidden;
+}
+.lang-btn{
+  background:none;border:none;
+  padding:6px 10px;
+  font-size:10px;font-family:var(--sans);font-weight:400;
+  letter-spacing:0.05em;
+  color:var(--ink-3);cursor:pointer;
+  transition:all .3s;
+}
+.lang-btn.active{background:var(--ink);color:var(--bg)}
+.lang-btn:hover:not(.active){color:var(--ink-2)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  position:relative;
+  padding:120px 48px 80px;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  overflow:hidden;
+  opacity:0.15;
+}
+.hero-bg svg{
+  position:absolute;
+  width:120%;height:120%;
+  top:-10%;left:-10%;
+  animation:drift 60s linear infinite;
+}
+@keyframes drift{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.hero-tag{
+  font-size:10px;font-weight:400;
+  letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:40px;
+  opacity:0;
+  animation:fadeUp 1s ease .3s forwards;
+}
+.hero-name{
+  font-family:var(--serif-cn);
+  font-size:clamp(48px,9vw,120px);
+  font-weight:300;
+  line-height:1;
+  letter-spacing:0.05em;
+  margin-bottom:16px;
+  opacity:0;
+  animation:fadeUp 1.2s ease .5s forwards;
+}
+.hero-name-jp{
+  font-family:var(--serif-jp);
+  font-size:clamp(20px,3vw,32px);
+  font-weight:300;
+  color:var(--ink-2);
+  letter-spacing:0.3em;
+  margin-bottom:48px;
+  opacity:0;
+  animation:fadeUp 1s ease .8s forwards;
+}
+.hero-line{
+  width:1px;height:60px;
+  background:var(--gold);
+  margin-bottom:48px;
+  opacity:0;
+  animation:fadeUp 1s ease 1s forwards;
+}
+.hero-philosophy{
+  font-family:var(--serif-en);
+  font-size:clamp(18px,2.5vw,28px);
+  font-weight:300;font-style:italic;
+  color:var(--ink-2);
+  max-width:600px;
+  line-height:1.5;
+  opacity:0;
+  animation:fadeUp 1s ease 1.2s forwards;
+}
+.hero-philosophy .cn{font-family:var(--serif-cn);font-style:normal}
+.hero-philosophy .jp{font-family:var(--serif-jp);font-style:normal}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;
+  transform:translateX(-50%);
+  font-size:10px;letter-spacing:0.2em;
+  color:var(--ink-3);
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeUp 1s ease 1.5s forwards;
+}
+.hero-scroll::after{
+  content:'';display:block;
+  width:1px;height:30px;
+  background:var(--ink-3);
+  margin:12px auto 0;
+  animation:scrollLine 2s ease infinite;
+}
+@keyframes scrollLine{
+  0%,100%{transform:scaleY(0.3);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== SECTION BASE ===== */
+.section{
+  padding:140px 48px;
+  max-width:1400px;
+  margin:0 auto;
+}
+.section-label{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:64px;
+}
+.section-label .num{
+  font-family:var(--serif-en);
+  font-size:13px;font-style:italic;
+  color:var(--gold);
+}
+.section-label .line{
+  width:40px;height:1px;
+  background:var(--gold);
+}
+.section-label .text{
+  font-size:10px;font-weight:400;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--ink-2);
+}
+
+/* ===== ABOUT ===== */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.about-text h2{
+  font-family:var(--serif-cn);
+  font-size:clamp(32px,5vw,56px);
+  font-weight:300;
+  line-height:1.2;
+  margin-bottom:32px;
+}
+.about-text h2 .jp{font-family:var(--serif-jp)}
+.about-text p{
+  font-size:14px;font-weight:300;
+  line-height:2;
+  color:var(--ink-2);
+  margin-bottom:24px;
+}
+.about-text p .accent{color:var(--gold);font-style:italic;font-family:var(--serif-en)}
+.about-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  margin-top:48px;
+  padding-top:48px;
+  border-top:1px solid var(--line);
+}
+.stat-num{
+  font-family:var(--serif-en);
+  font-size:36px;font-weight:300;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.stat-label{
+  font-size:10px;letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+.about-image{
+  position:relative;
+  aspect-ratio:3/4;
+  overflow:hidden;
+}
+.about-image img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(0.3) contrast(1.1);
+  transition:filter .6s;
+}
+.about-image:hover img{filter:grayscale(0) contrast(1)}
+.about-image::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 60%,rgba(10,9,8,0.4));
+  pointer-events:none;
+}
+.about-image-tag{
+  position:absolute;bottom:24px;left:24px;
+  font-family:var(--serif-en);
+  font-size:12px;font-style:italic;
+  color:var(--ink);
+  z-index:2;
+}
+
+/* ===== PORTFOLIO ===== */
+.portfolio-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:48px;
+}
+.portfolio-header h2{
+  font-family:var(--serif-cn);
+  font-size:clamp(28px,4vw,48px);
+  font-weight:300;
+}
+.portfolio-header h2 .jp{font-family:var(--serif-jp)}
+.portfolio-filters{
+  display:flex;gap:24px;
+}
+.filter-btn{
+  background:none;border:none;
+  font-size:11px;font-family:var(--sans);font-weight:400;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--ink-3);cursor:pointer;
+  padding:8px 0;
+  border-bottom:1px solid transparent;
+  transition:all .3s;
+}
+.filter-btn.active,.filter-btn:hover{
+  color:var(--gold);
+  border-bottom-color:var(--gold);
+}
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.portfolio-item{
+  position:relative;
+  aspect-ratio:1;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--bg-2);
+}
+.portfolio-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(0.4) brightness(0.85);
+  transition:all .6s cubic-bezier(.2,.6,.2,1);
+}
+.portfolio-item:hover img{
+  filter:grayscale(0) brightness(1);
+  transform:scale(1.05);
+}
+.portfolio-item .overlay{
+  position:absolute;inset:0;
+  background:rgba(10,9,8,0.6);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px;
+  opacity:0;
+  transition:opacity .4s;
+}
+.portfolio-item:hover .overlay{opacity:1}
+.overlay-tag{
+  font-size:10px;letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:6px;
+}
+.overlay-date{
+  font-family:var(--serif-en);
+  font-size:13px;font-style:italic;
+  color:var(--ink-2);
+}
+.portfolio-item.tall{grid-row:span 2;aspect-ratio:1/2}
+.portfolio-item.wide{grid-column:span 2;aspect-ratio:2/1}
+
+/* ===== PHILOSOPHY ===== */
+.philosophy{
+  text-align:center;
+  padding:160px 48px;
+  max-width:900px;
+  margin:0 auto;
+}
+.philosophy-mark{
+  font-family:var(--serif-cn);
+  font-size:clamp(80px,15vw,200px);
+  font-weight:300;
+  line-height:1;
+  color:var(--bg-3);
+  margin-bottom:-40px;
+  position:relative;
+  z-index:0;
+}
+.philosophy-text{
+  position:relative;z-index:1;
+  font-family:var(--serif-cn);
+  font-size:clamp(24px,3.5vw,40px);
+  font-weight:300;
+  line-height:1.6;
+  color:var(--ink);
+  margin-bottom:32px;
+}
+.philosophy-text .jp{font-family:var(--serif-jp)}
+.philosophy-en{
+  font-family:var(--serif-en);
+  font-size:18px;font-style:italic;font-weight:300;
+  color:var(--ink-2);
+  line-height:1.6;
+}
+
+/* ===== ITINERARY ===== */
+.itinerary-list{
+  display:flex;flex-direction:column;
+  gap:0;
+}
+.itinerary-item{
+  display:grid;
+  grid-template-columns:120px 1fr 1fr 120px;
+  gap:32px;
+  align-items:center;
+  padding:32px 0;
+  border-top:1px solid var(--line);
+  transition:all .4s;
+}
+.itinerary-item:last-child{border-bottom:1px solid var(--line)}
+.itinerary-item:hover{background:var(--bg-2);padding-left:16px;padding-right:16px}
+.itinerary-date{
+  font-family:var(--serif-en);
+  font-size:14px;font-style:italic;
+  color:var(--gold);
+}
+.itinerary-city{
+  font-family:var(--serif-cn);
+  font-size:24px;font-weight:400;
+}
+.itinerary-city .jp{font-family:var(--serif-jp)}
+.itinerary-city .en{font-family:var(--serif-en);font-style:italic;font-weight:300}
+.itinerary-status{
+  font-size:12px;color:var(--ink-2);
+}
+.itinerary-status .badge{
+  display:inline-block;
+  padding:3px 10px;
+  font-size:9px;letter-spacing:0.1em;
+  text-transform:uppercase;
+  border:1px solid var(--gold);
+  color:var(--gold);
+}
+.itinerary-status .badge.past{
+  border-color:var(--ink-3);
+  color:var(--ink-3);
+}
+.itinerary-arrow{
+  text-align:right;
+  font-size:20px;color:var(--ink-3);
+}
+
+/* ===== BOOKING ===== */
+.booking{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.booking-text h2{
+  font-family:var(--serif-cn);
+  font-size:clamp(32px,5vw,56px);
+  font-weight:300;
+  line-height:1.2;
+  margin-bottom:24px;
+}
+.booking-text h2 .jp{font-family:var(--serif-jp)}
+.booking-text p{
+  font-size:14px;
+  color:var(--ink-2);
+  line-height:2;
+  margin-bottom:32px;
+}
+.booking-actions{
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 32px;
+  font-size:11px;font-weight:400;
+  letter-spacing:0.15em;text-transform:uppercase;
+  text-decoration:none;
+  border:1px solid var(--ink-2);
+  color:var(--ink);
+  background:none;
+  cursor:pointer;
+  transition:all .3s;
+}
+.btn:hover{
+  background:var(--ink);
+  color:var(--bg);
+  border-color:var(--ink);
+}
+.btn.gold{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+.btn.gold:hover{
+  background:var(--gold);
+  color:var(--bg);
+}
+.booking-card{
+  background:var(--bg-2);
+  border:1px solid var(--line-2);
+  padding:48px;
+  position:relative;
+}
+.booking-card::before{
+  content:'';position:absolute;
+  top:-1px;left:-1px;width:24px;height:24px;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+}
+.booking-card::after{
+  content:'';position:absolute;
+  bottom:-1px;right:-1px;width:24px;height:24px;
+  border-bottom:1px solid var(--gold);
+  border-right:1px solid var(--gold);
+}
+.booking-card h3{
+  font-family:var(--serif-en);
+  font-size:18px;font-style:italic;font-weight:400;
+  color:var(--gold);
+  margin-bottom:32px;
+}
+.booking-info-row{
+  display:flex;justify-content:space-between;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+}
+.booking-info-row:last-child{border-bottom:none}
+.booking-info-row .label{
+  color:var(--ink-3);
+  font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.booking-info-row .value{
+  color:var(--ink);
+  font-family:var(--serif-en);
+  font-style:italic;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:80px 48px 40px;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+.footer-name{
+  font-family:var(--serif-cn);
+  font-size:24px;font-weight:300;
+  letter-spacing:0.2em;
+  margin-bottom:16px;
+}
+.footer-name .jp{font-family:var(--serif-jp)}
+.footer-social{
+  display:flex;justify-content:center;gap:32px;
+  margin:32px 0;
+}
+.footer-social a{
+  font-size:11px;letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--ink-3);text-decoration:none;
+  transition:color .3s;
+}
+.footer-social a:hover{color:var(--gold)}
+.footer-copy{
+  font-size:10px;letter-spacing:0.1em;
+  color:var(--ink-3);
+  text-transform:uppercase;
+}
+
+/* ===== LANG DATA ===== */
+[data-lang]{display:none}
+[data-lang].active{display:block}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .nav{padding:16px 24px}
+  .nav.scrolled{padding:12px 24px}
+  .nav-links{display:none}
+  .section{padding:80px 24px}
+  .hero{padding:100px 24px 60px}
+  .about-grid,.booking{grid-template-columns:1fr;gap:40px}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+  .portfolio-item.wide{grid-column:span 2}
+  .portfolio-item.tall{grid-row:span 1;aspect-ratio:1}
+  .itinerary-item{grid-template-columns:1fr;gap:8px}
+  .booking-card{padding:32px}
+}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity 1s ease,transform 1s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand">上野<span>道一</span></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#about" data-i18n="nav_about">ABOUT</a>
+      <a href="#work" data-i18n="nav_work">WORK</a>
+      <a href="#philosophy" data-i18n="nav_philosophy">PHILOSOPHY</a>
+      <a href="#itinerary" data-i18n="nav_itinerary">ITINERARY</a>
+      <a href="#booking" data-i18n="nav_booking">BOOKING</a>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang-btn="zh">中</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
+      <button class="lang-btn" data-lang-btn="jp">日</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#b8945f" stroke-width="0.5">
+      <circle cx="400" cy="400" r="380"/>
+      <circle cx="400" cy="400" r="300"/>
+      <circle cx="400" cy="400" r="220"/>
+      <circle cx="400" cy="400" r="140"/>
+      <path d="M400,20 Q500,200 400,400 Q300,600 400,780" />
+      <path d="M20,400 Q200,500 400,400 Q600,300 780,400" />
+      <path d="M120,120 Q300,300 400,400 Q500,500 680,680" />
+      <path d="M680,120 Q500,300 400,400 Q300,500 120,680" />
+    </svg>
+  </div>
+
+  <div class="hero-tag" data-i18n="hero_tag">TATTOO ARTIST · CHINA</div>
+  <h1 class="hero-name">上野道一</h1>
+  <div class="hero-name-jp">ウエノ ミチカズ</div>
+  <div class="hero-line"></div>
+  <div class="hero-philosophy">
+    <span data-lang="zh" class="active cn">遵循自然</span>
+    <span data-lang="en">Follow Nature</span>
+    <span data-lang="jp" class="jp">自然に従う</span>
+  </div>
+  <div class="hero-scroll" data-i18n="hero_scroll">SCROLL</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section" id="about">
+  <div class="section-label reveal">
+    <span class="num">01</span>
+    <span class="line"></span>
+    <span class="text" data-i18n="about_label">ABOUT</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2>
+        <span data-lang="zh" class="active">关于道一</span>
+        <span data-lang="en">About Michikazu</span>
+        <span data-lang="jp" class="jp">道一について</span>
+      </h2>
+      <div data-lang="zh" class="active">
+        <p>上野道一，独立纹身艺术家。生于中国，游走于东京与伦敦之间。</p>
+        <p>作品以黑灰为主，融合海洋生物、骷髅意象与自然元素。每一条线条都试图捕捉生命与死亡的交界——<span class="accent">遵循自然</span>，不刻意雕琢，让图案如生长般落在皮肤上。</p>
+        <p>擅长遮盖重做、原创手绘与自然主义风格纹身。预约制，每件作品独一无二。</p>
+      </div>
+      <div data-lang="en">
+        <p>Michikazu Ueno, independent tattoo artist. Based in China, traveling between Tokyo and London.</p>
+        <p>His work centers on black and grey, blending marine life, skull motifs, and natural elements. Each line seeks the threshold between life and death — <span class="accent">follow nature</span>, let the pattern settle on skin as if it grew there.</p>
+        <p>Specializing in cover-ups, original hand-drawn designs, and naturalist tattooing. Appointment only, every piece is one of a kind.</p>
+      </div>
+      <div data-lang="jp" class="jp">
+        <p>上野道一、独立タトゥーアーティスト。中国生まれ、東京とロンドンを行き来する。</p>
+        <p>作品は黒灰色を主体とし、海洋生物、髑髏の意匠、自然要素を融合させる。全ての線は生と死の境界を捉えようとする——<span class="accent">自然に従う</span>、無理に彫らず、模様が肌に自然に根付くように。</p>
+        <p>カバーアップ、オリジナル手描きデザイン、自然主義スタイルを専門とする。完全予約制、一点物。</p>
+      </div>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">230+</div>
+          <div class="stat-label" data-i18n="stat_posts">Works</div>
+        </div>
+        <div>
+          <div class="stat-num">4.6K</div>
+          <div class="stat-label" data-i18n="stat_followers">Followers</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label" data-i18n="stat_cities">Cities</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image reveal">
+      <img src="https://scontent.cdninstagram.com/v/t51.2885-19/350608474_594156615858796_30510147476805199_n.jpg?stp=dst-jpg_s320x320_tt6&_nc_cat=106&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy43MjguQzMifQ%3D%3D&_nc_ohc=LZYiRDKf8_UQ7kNvwGQMIS5&_nc_oc=Adqn_pSilclfoonp4dKg6c3uv2fh5U-UkEoUeKSlXNg5p38fDAoWUdlNW0OoUFVRO8k&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ss=79689&oh=00_AQGg0FZFgv09CTuO_0hWrYgsrxmTN5b90rr7-CNzWlvqlg&oe=6A828C60" alt="上野道一" onerror="this.style.display='none'">
+      <div class="about-image-tag">— self portrait</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section class="section" id="work">
+  <div class="section-label reveal">
+    <span class="num">02</span>
+    <span class="line"></span>
+    <span class="text" data-i18n="work_label">SELECTED WORK</span>
+  </div>
+  <div class="portfolio-header reveal">
+    <h2>
+      <span data-lang="zh" class="active">作品</span>
+      <span data-lang="en">Selected work</span>
+      <span data-lang="jp" class="jp">作品</span>
+    </h2>
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-i18n="filter_all">All</button>
+      <button class="filter-btn" data-i18n="filter_coverup">Cover-up</button>
+      <button class="filter-btn" data-i18n="filter_draw">Original</button>
+      <button class="filter-btn" data-i18n="filter_life">Life</button>
+    </div>
+  </div>
+  <div class="portfolio-grid reveal" id="portfolioGrid">
+    <!-- Items populated by JS -->
+  </div>
+</section>
+
+<!-- ===== PHILOSOPHY ===== -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-mark reveal">道</div>
+  <div class="philosophy-text reveal">
+    <span data-lang="zh" class="active">遵循自然<br>不逆其性 不强其形</span>
+    <span data-lang="en">Follow nature<br>Do not resist its nature<br>Do not force its form</span>
+    <span data-lang="jp" class="jp">自然に従う<br>その性に逆らわず<br>その形を強いずに</span>
+  </div>
+  <div class="philosophy-en reveal">
+    <span data-lang="zh" class="active">— 上野道一</span>
+    <span data-lang="en">— Michikazu Ueno</span>
+    <span data-lang="jp" class="jp">— 上野道一</span>
+  </div>
+</section>
+
+<!-- ===== ITINERARY ===== -->
+<section class="section" id="itinerary">
+  <div class="section-label reveal">
+    <span class="num">03</span>
+    <span class="line"></span>
+    <span class="text" data-i18n="itinerary_label">ITINERARY</span>
+  </div>
+  <div class="itinerary-list">
+    <div class="itinerary-item reveal">
+      <div class="itinerary-date">2026.09</div>
+      <div class="itinerary-city">
+        <span data-lang="zh" class="active">东京</span>
+        <span data-lang="en"><span class="en">Tokyo</span></span>
+        <span data-lang="jp" class="jp">東京</span>
+      </div>
+      <div class="itinerary-status">
+        <span class="badge" data-i18n="status_upcoming">Upcoming</span>
+      </div>
+      <div class="itinerary-arrow">→</div>
+    </div>
+    <div class="itinerary-item reveal">
+      <div class="itinerary-date">2026</div>
+      <div class="itinerary-city">
+        <span data-lang="zh" class="active">伦敦</span>
+        <span data-lang="en"><span class="en">London</span></span>
+        <span data-lang="jp" class="jp">ロンドン</span>
+      </div>
+      <div class="itinerary-status">
+        <span class="badge" data-i18n="status_planned">Planned</span>
+      </div>
+      <div class="itinerary-arrow">→</div>
+    </div>
+    <div class="itinerary-item reveal">
+      <div class="itinerary-date">—</div>
+      <div class="itinerary-city">
+        <span data-lang="zh" class="active">中国</span>
+        <span data-lang="en"><span class="en">China</span></span>
+        <span data-lang="jp" class="jp">中国</span>
+      </div>
+      <div class="itinerary-status">
+        <span class="badge" data-i18n="status_based">Based</span>
+      </div>
+      <div class="itinerary-arrow">●</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section class="section" id="booking">
+  <div class="section-label reveal">
+    <span class="num">04</span>
+    <span class="line"></span>
+    <span class="text" data-i18n="booking_label">BOOKING</span>
+  </div>
+  <div class="booking">
+    <div class="booking-text reveal">
+      <h2>
+        <span data-lang="zh" class="active">预约纹身</span>
+        <span data-lang="en">Book a session</span>
+        <span data-lang="jp" class="jp">予約について</span>
+      </h2>
+      <div data-lang="zh" class="active">
+        <p>通过 Instagram DM 预约。请附上你的设计想法、纹身位置和参考图片。每件作品均为原创定制，不接受复制他人作品。</p>
+        <p>擅长：黑灰写实 · 海洋生物 · 骷髅意象 · 遮盖重做 · 自然主义手绘</p>
+      </div>
+      <div data-lang="en">
+        <p>Book via Instagram DM. Include your design concept, placement, and reference images. Every piece is custom and original — no copies of other artists' work.</p>
+        <p>Specialties: Black & grey realism · Marine life · Skull motifs · Cover-ups · Naturalist hand-drawn</p>
+      </div>
+      <div data-lang="jp" class="jp">
+        <p>InstagramのDMで予約を受け付ける。デザインの希望、タトゥーの位置、参考画像を添えること。全て一点物のオーダーメイド——他のアーティストの作品のコピーは不可。</p>
+        <p>専門：黒灰色写实 · 海洋生物 · 髑髏モチーフ · カバーアップ · 自然主義手描き</p>
+      </div>
+      <div class="booking-actions">
+        <a href="https://www.instagram.com/daoyi_777/" target="_blank" class="btn gold" data-i18n="btn_dm">DM on Instagram</a>
+        <a href="https://www.instagram.com/daoyi_777/" target="_blank" class="btn" data-i18n="btn_portfolio">View Portfolio</a>
+      </div>
+    </div>
+    <div class="booking-card reveal">
+      <h3>— Studio Info</h3>
+      <div class="booking-info-row">
+        <span class="label" data-i18n="info_style">Style</span>
+        <span class="value">Black & Grey · Naturalist</span>
+      </div>
+      <div class="booking-info-row">
+        <span class="label" data-i18n="info_base">Based</span>
+        <span class="value">China</span>
+      </div>
+      <div class="booking-info-row">
+        <span class="label" data-i18n="info_travel">Travel</span>
+        <span class="value">Tokyo · London</span>
+      </div>
+      <div class="booking-info-row">
+        <span class="label" data-i18n="info_booking">Booking</span>
+        <span class="value">DM only</span>
+      </div>
+      <div class="booking-info-row">
+        <span class="label" data-i18n="info_instagram">Instagram</span>
+        <span class="value">@daoyi_777</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-name">
+    <span data-lang="zh" class="active">上野道一</span>
+    <span data-lang="en">Michikazu Ueno</span>
+    <span data-lang="jp" class="jp">上野道一</span>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/daoyi_777/" target="_blank">Instagram</a>
+    <a href="#" data-i18n="footer_email">Email</a>
+    <a href="#" data-i18n="footer_wechat">WeChat</a>
+  </div>
+  <div class="footer-copy">
+    <span data-lang="zh" class="active">© 2026 上野道一 · 保留所有权利</span>
+    <span data-lang="en">© 2026 Michikazu Ueno · All rights reserved</span>
+    <span data-lang="jp" class="jp">© 2026 上野道一 · 全著作権所有</span>
+  </div>
+</footer>
+
+<script>
+// ===== I18N TEXTS =====
+const i18n = {
+  zh: {
+    nav_about:'关于',nav_work:'作品',nav_philosophy:'理念',nav_itinerary:'行程',nav_booking:'预约',
+    hero_tag:'纹身艺术家 · 中国',hero_scroll:'向下滚动',
+    about_label:'关于',work_label:'精选作品',itinerary_label:'行程',booking_label:'预约',
+    stat_posts:'作品',stat_followers:'粉丝',stat_cities:'城市',
+    filter_all:'全部',filter_coverup:'遮盖',filter_draw:'原创',filter_life:'生活',
+    status_upcoming:'即将',status_planned:'计划中',status_based:'驻地',
+    btn_dm:'Instagram 私信预约',btn_portfolio:'查看作品集',
+    info_style:'风格',info_base:'驻地',info_travel:'行程',info_booking:'预约',info_instagram:'Instagram',
+    footer_email:'邮件',footer_wechat:'微信'
+  },
+  en: {
+    nav_about:'About',nav_work:'Work',nav_philosophy:'Philosophy',nav_itinerary:'Itinerary',nav_booking:'Booking',
+    hero_tag:'Tattoo artist · China',hero_scroll:'Scroll',
+    about_label:'About',work_label:'Selected work',itinerary_label:'Itinerary',booking_label:'Booking',
+    stat_posts:'Works',stat_followers:'Followers',stat_cities:'Cities',
+    filter_all:'All',filter_coverup:'Cover-up',filter_draw:'Original',filter_life:'Life',
+    status_upcoming:'Upcoming',status_planned:'Planned',status_based:'Based',
+    btn_dm:'DM on Instagram',btn_portfolio:'View portfolio',
+    info_style:'Style',info_base:'Based',info_travel:'Travel',info_booking:'Booking',info_instagram:'Instagram',
+    footer_email:'Email',footer_wechat:'WeChat'
+  },
+  jp: {
+    nav_about:'について',nav_work:'作品',nav_philosophy:'理念',nav_itinerary:'行程',nav_booking:'予約',
+    hero_tag:'タトゥーアーティスト · 中国',hero_scroll:'スクロール',
+    about_label:'について',work_label:'作品',itinerary_label:'行程',booking_label:'予約',
+    stat_posts:'作品',stat_followers:'フォロワー',stat_cities:'都市',
+    filter_all:'全て',filter_coverup:'カバー',filter_draw:'オリジナル',filter_life:'生活',
+    status_upcoming:'開催予定',status_planned:'計画中',status_based:'拠点',
+    btn_dm:'Instagram DMで予約',btn_portfolio:'作品を見る',
+    info_style:'スタイル',info_base:'拠点',info_travel:'渡航',info_booking:'予約',info_instagram:'Instagram',
+    footer_email:'メール',footer_wechat:'WeChat'
+  }
+};
+
+let currentLang = 'zh';
+
+function switchLang(lang) {
+  currentLang = lang;
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.langBtn === lang);
+  });
+  // Update [data-lang] spans
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === lang);
+  });
+  // Update [data-i18n] elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang] && i18n[lang][key]) {
+      el.textContent = i18n[lang][key];
+    }
+  });
+  // Update html lang
+  document.documentElement.lang = lang === 'zh' ? 'zh' : lang === 'jp' ? 'ja' : 'en';
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchLang(btn.dataset.langBtn));
+});
+
+// ===== NAV SCROLL =====
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ===== REVEAL ON SCROLL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== PORTFOLIO DATA =====
+const portfolioItems = [
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/773483322_18102754637594166_3128658931219929369_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=mApdn-j7g-EQ7kNvwHifpeN&_nc_oc=Ado26zgGHWoGbv2fuFAYAZdEtSJ8pzCmayXrp3jsGy20TnIiUcoaN8Eww0Igul99-F4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQHASu7z1JtE5urbBu8bdk3OI7KRrA29v1dIRGbGr38ZtA&oe=6A827184', date: '2026.08.11', cat: 'draw', size: 'tall' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/770728507_18102633632594166_7804052649320212463_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=w9BV2A8MDxsQ7kNvwEPVASM&_nc_oc=Adqj7ZoPA65H5_ek88eJceQwXq7KE0tL56gA4nvjqu2HQ4qDceZ6MQB-oLxYEC_UvaA&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQEmbWCtWEJlRCAQ7zn3EwaXJoUy4tbsmCE5fx_Y-iv1Xg&oe=6A82975B', date: '2026.08.10', cat: 'life' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/763308773_18101799293594166_8020351940803677997_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=PNaazMTlc9YQ7kNvwEJHytb&_nc_oc=AdojatwW6jIuC0U0PlSCYU-0S0i6ZRuJ8li0YH4C2k1FxzD4D2Y3aMqwmbn2ByzAIng&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQGSeT1tSkgW-6HocePHhgkJ-cXCzVBQ_QztJ2Ju3mnLng&oe=6A828EEB', date: '2026.08.04', cat: 'draw' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/764382598_18101645156594166_9139065315786692373_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wAV8azhakXAQ7kNvwFURSlX&_nc_oc=AdpnHsTo6jn3h-y7AC1Cc1a7RO9PwBT_q9b5eK4LhTUfNA4VflIlVCwRdYLm2xoKDQ0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQFNDUYf1S7EFToAnKF4FqKgAvYSZxeZtBqr881Y70MrMw&oe=6A828473', date: '2026.08.03', cat: 'coverup' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/760891647_18101269268594166_2942052862219022858_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=FbsPbSZdIIsQ7kNvwEa-999&_nc_oc=AdpRoCK25mxxQ4saKCHBuStjTnQLidSYBkXHSi-Qgx2CfXzn-rYeKGRA1p5ixaWinas&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQG7-Z0RG37lIFjqkfy2vir-l05X18HMEXDg7sTf2ufbrw&oe=6A828FE6', date: '2026.07.31', cat: 'draw', size: 'wide' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/756661742_18100946159594166_6231998247273324286_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=0zijaqLb-EUQ7kNvwEW5zNS&_nc_oc=AdqkFa-g0HRxa1CzOVDH7FfIvm7Rafca6zVqgRXP2T3EXyi6NRt9MkwQaB_AmP-riNE&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQGwYSAls-HOojnIEk-1JWB7thDik5ovhOECAJVKiyofnQ&oe=6A8283C2', date: '2026.07.29', cat: 'life' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/749143173_18099439724594166_1956706509071434378_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=z2bHg7BQoZcQ7kNvwH0w-9R&_nc_oc=AdoRaFKajqrMpwAEWOeScE_CBsg5bpGvYM7xeTH94U7ZTcqWTCACDuYYbRD4uFbTrgg&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQEECeYrgnzVhtg1JO1ahjKyRj7PP5OgE-ayO6NpObg_4g&oe=6A826D7E', date: '2026.07.18', cat: 'coverup' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/748150659_18099280838594166_8232584489891466028_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=EWqLtGwChyYQ7kNvwH8cbNX&_nc_oc=AdrdTyP5t7TmtAbb0UokGxPeF5EZk-f4-kQT2gxzWqlP9RilSTOyGGJzlXtLjCLs-Eg&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQHEHnUrAI1LnTlODAPdbohAidpcYqle3MfdhaK6d4NArg&oe=6A827C01', date: '2026.07.17', cat: 'draw' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/749258257_18099138515594166_8359223113164265940_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=3RlN_GUOYz4Q7kNvwGoH-Oa&_nc_oc=Adp9Rq1Y-8iVEMgpGb3ub-sMTxptIzzwLaxQtr-B9gZ-tbglCWE85WdxErwRgVXNue4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQGLoAxNHbXSMnKSzrYPgCvlXaNIKbPRD1spL6LdmylG8A&oe=6A82813F', date: '2026.07.16', cat: 'life' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/735111130_18097585205594166_3929577800471247975_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=6tJuDNHIhE8Q7kNvwHuIg6V&_nc_oc=Adovr9a2KfnLWog-JspWdfsYdfesBlJwdo-s-FqOLhDaH1LG--OjJHmb-Nbr7ezsFB4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQE5A33fFTLzmhjx0pLHMyYlYUNEBMqw8-fe5COm-tv5xg&oe=6A8287D2', date: '2026.07.05', cat: 'draw' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.71878-15/730324144_1019533127461008_536445246676768587_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=SZHquDBbPVYQ7kNvwFsnJu2&_nc_oc=AdrA3O9uky68mLWbYL-PSsZ6Cn6FRSOoTpfwPJA8AStMZ5hT4h4np_gDhTq_ioWQtTI&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQE4u8CVVyLmn3_kbi5WVWGo6ruAtc0xCFIfJtlIJY88uw&oe=6A826F9F', date: '2026.06.30', cat: 'life' },
+  { img: 'https://scontent.cdninstagram.com/v/t51.82787-15/730015283_18095935394594166_3965476701566007952_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=BMykpDEMFx8Q7kNvwEHqRwl&_nc_oc=Ado27XBmT8FYSZgbSVfyxdEjLatQJ1qIqsq51ecQLhl7xOEuTHi_gEjSqME8q22jcBo&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=GKssQfqapPDEhP0nxQMcMA&_nc_ss=79689&oh=00_AQHB0sYlHH0oPumg8tCPiQ3RYJtnot-t5f3-n9rAsS1wWg&oe=6A827072', date: '2026.06.24', cat: 'coverup' }
+];
+
+const catLabels = {
+  zh: { draw:'原创手绘', coverup:'遮盖重做', life:'生活记录' },
+  en: { draw:'Original', coverup:'Cover-up', life:'Life' },
+  jp: { draw:'オリジナル', coverup:'カバー', life:'生活' }
+};
+
+function renderPortfolio(filter = 'all') {
+  const grid = document.getElementById('portfolioGrid');
+  grid.innerHTML = '';
+  portfolioItems
+    .filter(item => filter === 'all' || item.cat === filter)
+    .forEach(item => {
+      const div = document.createElement('div');
+      div.className = `portfolio-item ${item.size || ''}`;
+      div.dataset.cat = item.cat;
+      div.innerHTML = `
+        <img src="${item.img}" alt="上野道一 tattoo ${item.date}" loading="lazy"
+             onerror="this.parentElement.style.display='none'">
+        <div class="overlay">
+          <div class="overlay-tag">${catLabels[currentLang][item.cat] || ''}</div>
+          <div class="overlay-date">${item.date}</div>
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filterMap = { 0:'all', 1:'coverup', 2:'draw', 3:'life' };
+    const idx = [...btn.parentElement.children].indexOf(btn);
+    renderPortfolio(filterMap[idx]);
+  });
+});
+
+// Initial render
+renderPortfolio();
+</script>
+</body>
+</html>
